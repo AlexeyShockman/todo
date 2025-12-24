@@ -1,0 +1,4 @@
+
+const FIRST_LOADING_TIMEOUT = 0;
+
+export {FIRST_LOADING_TIMEOUT};
