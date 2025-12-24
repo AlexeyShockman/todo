@@ -7,8 +7,8 @@ import type {ToggleableNoteKeys} from "../../types/note.ts";
 
 
 interface NotesCollapseProps {
-    toggleNote: (id: string, property: ToggleableNoteKeys) => void;
-    deleteNote: (id: string) => void;
+    toggleNote: (id: string, property: ToggleableNoteKeys) => Promise<void>;
+    deleteNote: (id: string) => Promise<void>;
 }
 
 export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
