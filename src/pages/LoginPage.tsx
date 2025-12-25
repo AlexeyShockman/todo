@@ -5,6 +5,7 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {FirebaseError} from "firebase/app";
 import {useMessage} from "../ui/MessageContext.tsx";
 import {Link, useNavigate} from "react-router-dom";
+import {useI18n} from "../hooks/useI18n.ts";
 
 interface LoginFormValues {
     email: string;
@@ -16,26 +17,27 @@ export default function LoginPage() {
     const messageApi = useMessage();
     const auth = getAuth();
     const navigate = useNavigate();
+    const {t} = useI18n();
 
     async function handleLogin(values: LoginFormValues): Promise<void> {
         const { email, password } = values;
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            messageApi.success('Успешный вход');
+            messageApi.success(t.loginPage.loginSuccessText);
             navigate("/");
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
                 messageApi.error(err.message);
             } else {
-                messageApi.error('Непредвиденная ошибка');
+                messageApi.error(t.loginPage.loginErrorText);
             }
         }
     }
 
     return (
         <div style={{ maxWidth: 450, margin: '20px auto' }}>
-            <Title level={2}>Авторизация</Title>
+            <Title level={2}>{t.loginPage.title}</Title>
 
             <Form<LoginFormValues>
                 name="login"
@@ -44,25 +46,25 @@ export default function LoginPage() {
             >
                 <Form.Item
                     name="email"
-                    rules={[{ required: true, message: 'Введите Email' }]}
+                    rules={[{ required: true, message: t.loginPage.emailMessage }]}
                 >
-                    <Input prefix={<UserOutlined />} placeholder="Email" />
+                    <Input prefix={<UserOutlined />} placeholder={t.loginPage.emailPlaceholder} />
                 </Form.Item>
 
                 <Form.Item
                     name="password"
-                    rules={[{ required: true, message: 'Введите пароль' }]}
+                    rules={[{ required: true, message: t.loginPage.passwordMessage }]}
                 >
-                    <Input.Password prefix={<LockOutlined />} placeholder="Password" />
+                    <Input.Password prefix={<LockOutlined />} placeholder={t.loginPage.passwordPlaceholder} />
                 </Form.Item>
 
                 <Form.Item>
                     <Button block type="primary" htmlType="submit">
-                        Вход
+                        {t.loginPage.buttonText}
                     </Button>
                 </Form.Item>
             </Form>
-            <Link to="/forgot-password">Забыли пароль?</Link>
+            <Link to="/forgot-password">{t.loginPage.forgotPasswordText}</Link>
         </div>
     );
 }

@@ -1,5 +1,6 @@
 export const dictionary = {
     ru: {
+        code: 'ru-RU',
         list: {
             emptyList: {
                 title: 'Заметок еще нет.',
@@ -30,7 +31,52 @@ export const dictionary = {
                 archive: 'Архив',
             },
         },
-        code: 'ru-RU',
+        loginPage: {
+            title: 'Авторизация',
+            buttonText: 'Вход',
+            loginSuccessText: 'Успешный вход',
+            loginErrorText: 'Непредвиденная ошибка',
+            emailPlaceholder: 'Введите Email',
+            emailMessage: 'Необходимо ввести Email',
+            passwordPlaceholder: 'Введите пароль',
+            passwordMessage: 'Необходимо ввести пароль',
+            forgotPasswordText: 'Забыли пароль?',
+        },
+        page404: {
+            title: 'Ошибка 404',
+            text: 'Страница с таким адресом не найдена',
+            linkText: 'На главную',
+        },
+        signupPage: {
+            title: 'Регистрация',
+            differentPasswordsError: 'Пароли не совпадают',
+            createSuccessText: {
+                firstPart: 'Аккаунт',
+                secondPart: 'создан!',
+            },
+            createErrorText: 'Неожиданная ошибка при создании учетной записи',
+            alreadyRegistered: {
+                title: 'Вы уже зарегистрированы',
+                text: 'Логин:',
+            },
+            forms: {
+                emailMessage: 'Введите Email',
+                emailPlaceholder: 'Email',
+                passwordMessage: 'Введите пароль',
+                passwordPlaceholder: 'Пароль',
+                repeatPasswordMessage: 'Повторите пароль',
+                repeatPasswordPlaceholder: 'Повторите пароль',
+                buttonText: 'Регистрация',
+            },
+        },
+        forgotPasswordPage: {
+            title: 'Восстановление пароля',
+            forms: {
+                emailMessage: 'Введите ваш email',
+                emailPlaceholder: 'Email',
+                buttonText: 'Отправить ссылку',
+            }
+        },
         weather: {
             clear: 'Ясно',
             mostlyClear: 'Преимущественно ясно',
@@ -54,6 +100,7 @@ export const dictionary = {
         }
     },
     en: {
+        code: 'en-US',
         list: {
             emptyList: {
                 title: 'No notes yet.',
@@ -68,15 +115,15 @@ export const dictionary = {
                     longText: 'Long text',
                 },
                 buttons: {
-                    add: 'add',
-                    loading: 'loading',
+                    add: 'Add',
+                    loading: 'Loading',
                 },
                 input: {
                     shortNote: 'Add a note',
                     title: 'Title',
                     text: 'Note text',
-                    tags: 'Tags (separated by spaces)'
-                }
+                    tags: 'Tags (separated by spaces)',
+                },
             },
             collapse: {
                 wip: 'In progress',
@@ -84,7 +131,52 @@ export const dictionary = {
                 archive: 'Archive',
             },
         },
-        code: 'en-US',
+        loginPage: {
+            title: 'Authorization',
+            buttonText: 'Sign in',
+            loginSuccessText: 'Successfully signed in',
+            loginErrorText: 'Unexpected error',
+            emailPlaceholder: 'Email is required',
+            emailMessage: 'Enter your email',
+            passwordPlaceholder: 'Enter password',
+            passwordMessage: 'Password is required',
+            forgotPasswordText: 'Forgot password?',
+        },
+        page404: {
+            title: '404 Error',
+            text: 'The page with this address was not found',
+            linkText: 'Go to home',
+        },
+        signupPage: {
+            title: 'Sign up',
+            differentPasswordsError: 'Passwords do not match',
+            createSuccessText: {
+                firstPart: 'Account',
+                secondPart: 'created!',
+            },
+            createErrorText: 'Unexpected error while creating an account',
+            alreadyRegistered: {
+                title: 'You are already registered',
+                text: 'Login:',
+            },
+            forms: {
+                emailMessage: 'Enter your email',
+                emailPlaceholder: 'Email',
+                passwordMessage: 'Enter password',
+                passwordPlaceholder: 'Password',
+                repeatPasswordMessage: 'Repeat password',
+                repeatPasswordPlaceholder: 'Repeat password',
+                buttonText: 'Sign up',
+            },
+        },
+        forgotPasswordPage: {
+            title: 'Password recovery',
+            forms: {
+                emailMessage: 'Enter your email',
+                emailPlaceholder: 'Email',
+                buttonText: 'Send link',
+            },
+        },
         weather: {
             clear: 'Clear',
             mostlyClear: 'Mostly clear',
@@ -105,7 +197,7 @@ export const dictionary = {
                 delete: 'Delete (irreversible)',
                 archiveNotEdited: 'Archived notes cannot be edited',
             },
-        }
+        },
     },
 } as const;
 

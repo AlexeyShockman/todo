@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { Button, Form, Input, Typography } from "antd";
 import {useAuth} from "../auth/AuthProvider.tsx";
+import {useI18n} from "../hooks/useI18n.ts";
+import {UserOutlined} from "@ant-design/icons";
 
 const { Title } = Typography;
 
 export default function ForgotPasswordPage() {
     const [loading, setLoading] = useState(false);
     const { resetPassword } = useAuth();
+    const { t } = useI18n();
 
 
     const onFinish = async (values: { email: string }) => {
@@ -20,20 +23,20 @@ export default function ForgotPasswordPage() {
 
     return (
         <div style={{ maxWidth: 400, margin: "50px auto" }}>
-            <Title level={2}>Восстановление пароля</Title>
+            <Title level={2}>{t.forgotPasswordPage.title}</Title>
 
             <Form name="forgot-password" onFinish={onFinish} layout="vertical">
                 <Form.Item
                     label="Email"
                     name="email"
-                    rules={[{ required: true, message: "Введите ваш email" }]}
+                    rules={[{ required: true, message: t.forgotPasswordPage.forms.emailMessage }]}
                 >
-                    <Input placeholder="Email" />
+                    <Input prefix={<UserOutlined />} placeholder={t.forgotPasswordPage.forms.emailMessage} />
                 </Form.Item>
 
                 <Form.Item>
                     <Button type="primary" htmlType="submit" loading={loading} block>
-                        Отправить ссылку
+                        {t.forgotPasswordPage.forms.buttonText}
                     </Button>
                 </Form.Item>
             </Form>
