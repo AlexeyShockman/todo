@@ -15,8 +15,8 @@ export const dictionary = {
                     longText: 'Большой текст',
                 },
                 buttons: {
-                    add: 'добавить',
-                    loading: 'загрузка',
+                    add: 'Добавить',
+                    loading: 'Загрузка',
                 },
                 input: {
                     shortNote: 'Добавить заметку',
