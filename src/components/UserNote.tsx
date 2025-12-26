@@ -111,7 +111,8 @@ export function UserNote({
                         <Text
                             style={{
                                 color: done ? token.colorSuccess : token.colorText,
-                                fontSize: header ? token.fontSize : token.fontSizeXL
+                                fontSize: header ? token.fontSize : token.fontSizeXL,
+                                whiteSpace: header ? 'pre-wrap' : 'normal'
                             }}
                             // editable={{
                             //     icon: <HighlightOutlined />,

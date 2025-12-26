@@ -27,7 +27,7 @@ export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
         {key: "archive", notes: archivedNotes, label: t.list.collapse.archive, count: archiveCount},
     ];
 
-    const defaultActiveKey = ["wip", "done"];
+    const defaultActiveKey = ["wip"];
 
     const items = panels
         .filter(({count}) => count > 0)
