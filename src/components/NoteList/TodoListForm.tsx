@@ -41,9 +41,17 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
 
     return (
         <>
-            <Space.Compact style={{width: '100%', marginBottom: 4}}>
+            <Space
+                direction="vertical"
+                size={6}
+                style={{
+                    width: '100%',
+                    marginBottom: 10,
+                }}
+            >
                 {noteOptions.longText && (
                     <Input
+                        size="large"
                         placeholder={t.list.edit.input.title}
                         value={headerText}
                         onChange={e => setHeaderText(e.target.value)}
@@ -51,32 +59,46 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
                         disabled={btnLoading}
                     />
                 )}
-                <Input
+
+                <Input.TextArea
+                    size="large"
                     placeholder={t.list.edit.input[noteOptions.longText ? 'text' : 'shortNote']}
                     value={text}
                     onChange={e => setText(e.target.value)}
-                    onPressEnter={handlePressEnter}
                     disabled={btnLoading}
+                    autoSize={{ minRows: 3, maxRows: 5 }}
                 />
-                <Button
-                    type="primary"
-                    onClick={handleAdd}
-                    disabled={isFormEmpty || btnLoading}
-                    loading={btnLoading}
-                >
-                    {!btnLoading ? t.list.edit.buttons.add : t.list.edit.buttons.loading}
-                </Button>
-            </Space.Compact>
-            {noteOptions.tags && (
-                <Input
-                    style={{marginBottom: 4}}
-                    placeholder={t.list.edit.input.tags}
-                    value={tagsText}
-                    onChange={e => setTagsText(e.target.value)}
-                    onPressEnter={handlePressEnter}
-                    disabled={btnLoading}
-                />
-            )}
+
+                {noteOptions.tags && (
+                    <Input
+                        size="large"
+                        placeholder={t.list.edit.input.tags}
+                        value={tagsText}
+                        onChange={e => setTagsText(e.target.value)}
+                        onPressEnter={handlePressEnter}
+                        disabled={btnLoading}
+                    />
+                )}
+
+                {/* Контейнер для центрирования кнопки */}
+                <div style={{ display: 'flex', justifyContent: 'center' }}>
+                    <Button
+                        type="primary"
+                        onClick={handleAdd}
+                        disabled={isFormEmpty || btnLoading}
+                        loading={btnLoading}
+                        style={{
+                            width: '100%',
+                            maxWidth: '50%', // ≈ 50% на десктопе
+                        }}
+                    >
+                        {!btnLoading
+                            ? t.list.edit.buttons.add
+                            : t.list.edit.buttons.loading}
+                    </Button>
+                </div>
+            </Space>
         </>
+
     )
 }
