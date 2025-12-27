@@ -39,6 +39,12 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
 
     const handlePressEnter = () => { if (!isFormEmpty) handleAdd(); };
 
+    const handleTextKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+        if ((e.ctrlKey || e.metaKey) && e.key === 'Enter' && !isFormEmpty) {
+            handleAdd();
+        }
+    };
+
     return (
         <>
             <Space
@@ -67,6 +73,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
                     onChange={e => setText(e.target.value)}
                     disabled={btnLoading}
                     autoSize={{ minRows: 3, maxRows: 5 }}
+                    onKeyDown={handleTextKeyDown}
                 />
 
                 {noteOptions.tags && (
@@ -89,7 +96,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
                         loading={btnLoading}
                         style={{
                             width: '100%',
-                            maxWidth: '50%', // ≈ 50% на десктопе
+                            maxWidth: '50%',
                         }}
                     >
                         {!btnLoading

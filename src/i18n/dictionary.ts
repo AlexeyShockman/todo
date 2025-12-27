@@ -30,6 +30,7 @@ export const dictionary = {
                 done: 'Завершено',
                 archive: 'Архив',
             },
+            tagsPanelText: 'Фильтрация по тегам:',
         },
         loginPage: {
             title: 'Авторизация',
@@ -130,6 +131,7 @@ export const dictionary = {
                 done: 'Completed',
                 archive: 'Archive',
             },
+            tagsPanelText: 'Filter by tags:',
         },
         loginPage: {
             title: 'Authorization',
