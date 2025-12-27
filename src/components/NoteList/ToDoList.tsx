@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import {Space, Typography} from 'antd';
+import {Divider, Space, Typography} from 'antd';
 import { addNoteDB, removeNoteDB, updateNoteDB } from "../../api/notes.ts";
 import {getCurrentWeather} from "../../services/weather.ts";
 import type {Note, ToggleableNoteKeys} from "../../types/note.ts";
@@ -122,6 +122,8 @@ export function ToDoList() {
                         onAddNote={addNote}
                     />
                     <TagsPanel />
+
+                    <Divider style={{ margin: '20px 0' }} />
 
                     {(notesR.length === 0 && loading === false) ? (
                         <Space style={{display: 'grid', justifyItems: 'center', marginTop: 12}}>

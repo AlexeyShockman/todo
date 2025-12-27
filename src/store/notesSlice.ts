@@ -58,6 +58,9 @@ const notesSlice = createSlice({
                 state.activeTags.push(tag);
             }
         },
+        clearAllTags: (state) => {
+            state.activeTags = [];
+        },
         resetNotes: () => initialState,
 
     },
@@ -124,5 +127,5 @@ export const selectNotesData = createSelector(
         };
     }
 );
-export const { addNote, updateNote, removeNote, setAllNotes, toggleTag, resetNotes } = notesSlice.actions;
+export const { addNote, updateNote, removeNote, setAllNotes, toggleTag, clearAllTags, resetNotes } = notesSlice.actions;
 export default notesSlice.reducer;

@@ -4,6 +4,7 @@ import {useSelector} from "react-redux";
 import {useI18n} from "../../hooks/useI18n.ts";
 import {selectNotesData} from "../../store/notesSlice.ts";
 import type {ToggleableNoteKeys} from "../../types/note.ts";
+import {EmptyTagFilterScreen} from "./EmptyTagFilterScreen.tsx";
 
 
 interface NotesCollapseProps {
@@ -27,6 +28,12 @@ export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
         {key: "archive", notes: archivedNotes, label: t.list.collapse.archive, count: archiveCount},
     ];
 
+    if (!(activeCount || doneCount || archiveCount)) {
+        return (
+            <EmptyTagFilterScreen />
+        )
+    }
+
     const defaultActiveKey = ["wip"];
 
     const items = panels
@@ -49,6 +56,6 @@ export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
         }));
 
     return (
-        <Collapse defaultActiveKey={defaultActiveKey} items={items} style={{marginTop: "2rem"}}/>
+        <Collapse defaultActiveKey={defaultActiveKey} items={items}/>
     );
 }
