@@ -17,6 +17,10 @@ export const dictionary = {
                 title: 'Заметок еще нет.',
                 text: 'Но вы легко можете добавить новые!',
             },
+            emptyListByTags: {
+                title: 'Заметок с такой комбинацией тегов еще нет',
+                buttonText: 'Сброс тегов',
+            },
             loadingErrorText: 'Возникла ошибка при загрузке и добавлении новой заметки',
             firstLoadingText: 'Получение списка задач с сервера',
             edit: {
@@ -41,6 +45,7 @@ export const dictionary = {
                 done: 'Завершено',
                 archive: 'Архив',
             },
+            tagsPanelText: 'Фильтрация по тегам:',
         },
         loginPage: {
             title: 'Авторизация',
@@ -128,6 +133,10 @@ export const dictionary = {
                 title: 'No notes yet.',
                 text: 'But you can easily add some!',
             },
+            emptyListByTags: {
+                title: 'There are no notes with this combination of tags yet',
+                buttonText: 'Clear tags',
+            },
             loadingErrorText: 'An error occurred while loading or adding a note.',
             firstLoadingText: 'Fetching tasks from the server',
             edit: {
@@ -152,6 +161,7 @@ export const dictionary = {
                 done: 'Completed',
                 archive: 'Archive',
             },
+            tagsPanelText: 'Filter by tags:',
         },
         loginPage: {
             title: 'Authorization',
