@@ -5,10 +5,12 @@ import LangToggle from "./LangToggle.tsx";
 import Title from "antd/es/typography/Title";
 import {useAuth} from "../auth/AuthProvider.tsx";
 import {Link, useNavigate } from "react-router-dom";
+import {useI18n} from "../hooks/useI18n.ts";
 
 
 export function AppHeader () {
     const { token } = theme.useToken();
+    const {t} = useI18n();
     const { user, loading, logout } = useAuth();
     const navigate = useNavigate();
 
@@ -42,16 +44,16 @@ export function AppHeader () {
                 {user && user.email ? (
                     <>
                         <Title level={5} style={{ margin: 0 }}>
-                            {loading ? "Аутентификация и загрузка..." : user?.email ?? "Не авторизован"}
+                            {loading ? t.header.loadingStatusText : user?.email ?? t.header.unauthorizedUserName}
                         </Title>
                         <Button type='text' onClick={handleLogout}>
-                            Выйти
+                            {t.header.buttons.exit}
                         </Button>
                     </>
                 ) : (
                     <>
-                        <Link to="/signup">Регистрация</Link>
-                        <Link to="/login">Авторизация</Link>
+                        <Link to="/signup">{t.header.linkText.registration}</Link>
+                        <Link to="/login">{t.header.linkText.login}</Link>
                     </>
                 )}
 
