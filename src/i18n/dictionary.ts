@@ -1,6 +1,17 @@
 export const dictionary = {
     ru: {
         code: 'ru-RU',
+        header: {
+            loadingStatusText: 'Аутентификация и загрузка...',
+            unauthorizedUserName: 'Не авторизован',
+            linkText: {
+                registration: 'Регистрация',
+                login: 'Авторизация',
+            },
+            buttons: {
+                exit: 'Выйти'
+            },
+        },
         list: {
             emptyList: {
                 title: 'Заметок еще нет.',
@@ -106,6 +117,17 @@ export const dictionary = {
     },
     en: {
         code: 'en-US',
+        header: {
+            loadingStatusText: 'Authentication and loading...',
+            unauthorizedUserName: 'Not authorized',
+            linkText: {
+                registration: 'Registration',
+                login: 'Login',
+            },
+            buttons: {
+                exit: 'Logout',
+            },
+        },
         list: {
             emptyList: {
                 title: 'No notes yet.',
