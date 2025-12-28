@@ -44,7 +44,7 @@ export function AppHeader () {
                 {user && user.email ? (
                     <>
                         <Title level={5} style={{ margin: 0 }}>
-                            {loading ? t.header.loadingStatusText : user?.email ?? t.header.unauthorizedUserName}
+                            {loading ? t.header.loadingStatusText : (user?.email.split('@')?.[0] || user?.email) ?? t.header.unauthorizedUserName}
                         </Title>
                         <Button type='text' onClick={handleLogout}>
                             {t.header.buttons.exit}
