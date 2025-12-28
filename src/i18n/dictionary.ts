@@ -46,6 +46,7 @@ export const dictionary = {
                 archive: 'Архив',
             },
             tagsPanelText: 'Фильтрация по тегам:',
+            privateRouteLoadingText: 'Загрузка...',
         },
         loginPage: {
             title: 'Авторизация',
@@ -162,6 +163,7 @@ export const dictionary = {
                 archive: 'Archive',
             },
             tagsPanelText: 'Filter by tags:',
+            privateRouteLoadingText: 'Loading...',
         },
         loginPage: {
             title: 'Authorization',
