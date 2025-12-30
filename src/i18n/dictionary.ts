@@ -11,6 +11,10 @@ export const dictionary = {
             buttons: {
                 exit: 'Выйти'
             },
+            theme: {
+                dark: 'Тёмная',
+                light: 'Светлая',
+            },
         },
         list: {
             emptyList: {
@@ -137,6 +141,10 @@ export const dictionary = {
             },
             buttons: {
                 exit: 'Logout',
+            },
+            theme: {
+                dark: 'Dark',
+                light: 'Light',
             },
         },
         list: {
