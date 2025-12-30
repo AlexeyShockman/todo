@@ -10,7 +10,7 @@ import {LangProvider} from "../i18n/LangContext.tsx";
 import {AuthProvider} from "../auth/AuthProvider.tsx";
 import {AppRouter} from "../router/AppRouter.tsx";
 import {ThemeProvider, useThemeMode} from "../theme/ThemeContext.tsx";
-import {MessageProvider} from "../ui/MessageContext.tsx";
+import {FeedbackProvider} from "../ui/feedback/FeedbackContext.tsx";
 
 export default function Root() {
     return (
@@ -30,11 +30,11 @@ function ConfigWrapper() {
     return (
         <ConfigProvider theme={createThemeConfig(themeMode)}>
             <App>
-                <MessageProvider>
+                <FeedbackProvider>
                     <AuthProvider>
                         <AppRouter />
                     </AuthProvider>
-                </MessageProvider>
+                </FeedbackProvider>
             </App>
         </ConfigProvider>
     );

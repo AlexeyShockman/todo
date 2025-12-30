@@ -15,7 +15,7 @@ import {TagsPanel} from "./TagsPanel.tsx";
 import {TodoListForm} from "./TodoListForm.tsx";
 import {NotesCollapse} from "./NoteCollapse.tsx";
 import {useAuth} from "../../auth/AuthProvider.tsx";
-import {useMessage} from "../../ui/MessageContext.tsx";
+import {useFeedback} from "../../ui/feedback/FeedbackContext.tsx";
 
 
 const {Title} = Typography;
@@ -24,7 +24,7 @@ const {Title} = Typography;
 export function ToDoList() {
     const { t } = useI18n();
     const { user } = useAuth();
-    const messageApi = useMessage();
+    const { toast } = useFeedback();
 
     const notesR = useSelector(selectAllNotes);
     const loading = useSelector(selectNotesLoadingStatus);
@@ -39,7 +39,7 @@ export function ToDoList() {
 
     // TODO тут надо подумать над логикой. Это должен быть невозможный сценарий из-за приватного роута
     if (!user) {
-        messageApi.error('!user');
+        toast.error('!user');
         return;
     }
 
@@ -75,7 +75,7 @@ export function ToDoList() {
 
             await addNoteDB(user.uid, newNote);
         } catch (error) {
-            messageApi.error(t.list.loadingErrorText);
+            toast.error(t.list.loadingErrorText);
             console.log(error);
         } finally {
             setBtnLoading(false);

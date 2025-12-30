@@ -1,17 +1,19 @@
 import {type ReactNode, createContext, useContext, useEffect, useState } from "react";
 import {onAuthStateChanged, sendPasswordResetEmail, signOut, type User} from "firebase/auth";
 import { auth } from "../firebase";
-import {useMessage} from "../ui/MessageContext.tsx";
+import {useFeedback} from "../ui/feedback/FeedbackContext.tsx";
 import {FirebaseError} from "firebase/app";
+import { useDispatch } from "react-redux";
+import type { AppDispatch } from "../store";
+import {subscribeNotes, unsubscribeNotes} from "../store/noteThunks.ts";
+import {useI18n} from "../hooks/useI18n.ts";
+
 interface AuthContextType {
     user: User | null;
     loading: boolean;
     logout: () => Promise<void>;
     resetPassword: (email: string) => Promise<void>;
 }
-import { useDispatch } from "react-redux";
-import type { AppDispatch } from "../store";
-import {subscribeNotes, unsubscribeNotes} from "../store/noteThunks.ts";
 
 const AuthContext = createContext<AuthContextType | null>(null);
 
@@ -19,7 +21,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const [user, setUser] = useState<User | null>(null);
     const [loading, setLoading] = useState(true);
 
-    const messageApi = useMessage();
+    const { toast } = useFeedback();
+    const { t } = useI18n();
     const dispatch = useDispatch<AppDispatch>();
 
     useEffect(() => {
@@ -47,14 +50,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const resetPassword = async (email: string) => {
         try {
             await sendPasswordResetEmail(auth, email);
-            messageApi.success(
-                "Ссылка для восстановления пароля отправлена на ваш email (если введенный email существует в системе)"
-            );
+            toast.success(t.authStatus.resetPassword.success);
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
-                messageApi.error(err.message);
+                toast.error(err.message);
             } else {
-                messageApi.error("Ошибка при отправке письма");
+                toast.error(t.authStatus.resetPassword.error);
             }
             throw err;
         }
@@ -63,12 +64,12 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     const logout = async () => {
         try {
             await signOut(auth);
-            messageApi.success("Вы вышли из аккаунта");
+            toast.success(t.authStatus.logOut.success);
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
-                messageApi.error(err.message);
+                toast.error(err.message);
             } else {
-                messageApi.error("Ошибка при выходе");
+                toast.error(t.authStatus.logOut.error);
             }
             throw err;
         }

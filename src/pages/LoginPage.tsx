@@ -3,7 +3,7 @@ import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import {FirebaseError} from "firebase/app";
-import {useMessage} from "../ui/MessageContext.tsx";
+import {useFeedback} from "../ui/feedback/FeedbackContext.tsx";
 import {Link, useNavigate} from "react-router-dom";
 import {useI18n} from "../hooks/useI18n.ts";
 
@@ -14,7 +14,7 @@ interface LoginFormValues {
 }
 
 export default function LoginPage() {
-    const messageApi = useMessage();
+    const { toast } = useFeedback();
     const auth = getAuth();
     const navigate = useNavigate();
     const {t} = useI18n();
@@ -24,13 +24,13 @@ export default function LoginPage() {
 
         try {
             await signInWithEmailAndPassword(auth, email, password);
-            messageApi.success(t.loginPage.loginSuccessText);
+            toast.success(t.loginPage.loginSuccessText);
             navigate("/");
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
-                messageApi.error(err.message);
+                toast.error(err.message);
             } else {
-                messageApi.error(t.loginPage.loginErrorText);
+                toast.error(t.loginPage.loginErrorText);
             }
         }
     }

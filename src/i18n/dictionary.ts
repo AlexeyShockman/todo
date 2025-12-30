@@ -113,7 +113,18 @@ export const dictionary = {
               delete: 'Удалить (необратимо)',
               archiveNotEdited: 'Архивные записи не редактируются',
           },
-        }
+        },
+        authStatus: {
+            resetPassword: {
+                success: 'Ссылка для восстановления пароля отправлена на ваш email (если введенный email существует в системе)',
+                error: 'Ошибка при отправке письма',
+            },
+            logOut: {
+                success: 'Вы вышли из аккаунта',
+                error: 'Ошибка при выходе',
+            },
+            loadingText: 'Загрузка...',
+        },
     },
     en: {
         code: 'en-US',
@@ -229,6 +240,17 @@ export const dictionary = {
                 delete: 'Delete (irreversible)',
                 archiveNotEdited: 'Archived notes cannot be edited',
             },
+        },
+        authStatus: {
+            resetPassword: {
+                success: 'A password reset link has been sent to your email (if the provided email exists in the system)',
+                error: 'Error sending the email',
+            },
+            logOut: {
+                success: 'You have logged out',
+                error: 'Error during logout',
+            },
+            loadingText: 'Loading...',
         },
     },
 } as const;

@@ -3,7 +3,7 @@ import { Button, Form, Input } from 'antd';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import { FirebaseError } from 'firebase/app';
-import {useMessage} from "../ui/MessageContext.tsx";
+import {useFeedback} from "../ui/feedback/FeedbackContext.tsx";
 import {useNavigate} from "react-router-dom";
 import {useAuth} from "../auth/AuthProvider.tsx";
 import {useI18n} from "../hooks/useI18n.ts";
@@ -15,7 +15,7 @@ interface SignupFormValues {
 }
 
 export default function SignupPage() {
-    const messageApi = useMessage();
+    const { toast } = useFeedback();
     const auth = getAuth();
     const { user } = useAuth();
     const { t } = useI18n();
@@ -25,19 +25,19 @@ export default function SignupPage() {
         const { email, password, passwordRepeat } = values;
 
         if (password !== passwordRepeat) {
-            messageApi.error(t.signupPage.differentPasswordsError);
+            toast.error(t.signupPage.differentPasswordsError);
             return;
         }
 
         try {
             await createUserWithEmailAndPassword(auth, email, password);
-            messageApi.success(`${t.signupPage.createSuccessText.firstPart} ${email} ${t.signupPage.createSuccessText.secondPart}`);
+            toast.success(`${t.signupPage.createSuccessText.firstPart} ${email} ${t.signupPage.createSuccessText.secondPart}`);
             navigate("/login");
         } catch (err: unknown) {
             if (err instanceof FirebaseError) {
-                messageApi.error(err.message);
+                toast.error(err.message);
             } else {
-                messageApi.error(t.signupPage.createErrorText);
+                toast.error(t.signupPage.createErrorText);
             }
         }
     }
@@ -53,7 +53,7 @@ export default function SignupPage() {
 
     return (
         <div style={{ maxWidth: 450, margin: '20px auto' }}>
-            <Title level={2}>Регистрация</Title>
+            <Title level={2}>{t.signupPage.title}</Title>
 
             <Form<SignupFormValues>
                 name="register"

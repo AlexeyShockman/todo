@@ -4,7 +4,7 @@ import type {Note, ToggleableNoteKeys} from "../types/note";
 import {decodeWeather} from "../services/weather";
 import {useI18n} from "../hooks/useI18n";
 import {useState} from "react";
-import {useMessage} from "../ui/MessageContext.tsx";
+import {useFeedback} from "../ui/feedback/FeedbackContext.tsx";
 
 const {Text} = Typography;
 
@@ -28,7 +28,7 @@ export function UserNote({
 
     const {token} = theme.useToken();
     const { t } = useI18n();
-    const messageApi = useMessage();
+    const { toast } = useFeedback();
     const [loading, setLoading] = useState<{
         toggle: boolean;
         delete: boolean;
@@ -154,7 +154,7 @@ export function UserNote({
                                 aria-label="edit"
                                 type="default"
                                 icon={<EditOutlined/>}
-                                onClick={() => messageApi.info('функция редактирования еще не реализована :)')}
+                                onClick={() => toast.warning('Функция редактирования еще не реализована')}
                                 disabled={archive || isBusy}
                             />
                         </Tooltip>

@@ -23,7 +23,7 @@ const weatherCodeMap: Record<number, string> = {
 };
 
 const normalizeCurrent = (data: CurrentWeatherRaw) => (
-    `${data.temperature_2m}°C ${weatherCodeMap[data.weathercode] ?? 'Неизвестная погода'}`
+    `${data.temperature_2m}°C ${weatherCodeMap[data.weathercode] ?? 'Weather unknown'}`
 );
 
 const weatherUrl =
@@ -39,7 +39,7 @@ export const getCurrentWeather = async () => {
         const data = await fetchWeather();
         return normalizeCurrent(data.current);
     } catch {
-        return 'погода неизвестна';
+        return 'Weather unknown';
     }
 
 };
