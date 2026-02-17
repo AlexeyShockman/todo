@@ -16,6 +16,7 @@ import {TodoListForm} from "./TodoListForm.tsx";
 import {NotesCollapse} from "./NoteCollapse.tsx";
 import {useAuth} from "../../auth/AuthProvider.tsx";
 import {useFeedback} from "../../ui/feedback/FeedbackContext.tsx";
+import {ModalChangeNote} from "../ModalChangeNote.tsx";
 
 
 const {Title} = Typography;
@@ -30,6 +31,7 @@ export function ToDoList() {
     const loading = useSelector(selectNotesLoadingStatus);
 
     const [btnLoading, setBtnLoading] = useState(false);
+    const [editingNote, setEditingNote] = useState<Note | null>(null);
 
     const [noteOptions, setNoteOptions] = useState({
         weather: false,
@@ -106,10 +108,34 @@ export function ToDoList() {
         setNoteOptions(prev => ({...prev, [key]: !prev[key]}));
     };
 
+    const updateNote = async (newNote: Note) => {
+        const note = notesR.find((note) => note.id === newNote.id);
+
+        if (!note) return;
+
+        try {
+            await updateNoteDB(user.uid, newNote.id, newNote);
+        } finally {
+            toast.success(`заметка ${newNote.text.slice(0,10)}... обновлена`);
+            setEditingNote(null);
+        }
+    }
+
+    const openChangeNoteModal = async (noteId: string) => {
+        toast.success(`edit note ${noteId}`);
+        const changingNote = notesR.find((note) => note.id === noteId);
+        setEditingNote(changingNote || null);
+    }
+
     return (
         <div style={{maxWidth: 700, margin: '20px auto'}}>
             <ToDoListSkeleton isActive={loading}>
                 <>
+                    <ModalChangeNote
+                        note={editingNote}
+                        onClose={() => setEditingNote(null)}
+                        onSave={(updatedNote) => updateNote(updatedNote)}
+                    />
                     <Space style={{width: '100%', marginBottom: 4, display: 'flex', justifyContent: 'space-between'}}>
                         <NoteOptionsSelector
                             options={noteOptions}
@@ -134,6 +160,7 @@ export function ToDoList() {
                         <NotesCollapse
                             toggleNote={toggleNote}
                             deleteNote={deleteNote}
+                            editNote={openChangeNoteModal}
                         />
                     )}
 

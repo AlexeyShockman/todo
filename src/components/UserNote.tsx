@@ -4,13 +4,13 @@ import type {Note, ToggleableNoteKeys} from "../types/note";
 import {decodeWeather} from "../services/weather";
 import {useI18n} from "../hooks/useI18n";
 import {useState} from "react";
-import {useFeedback} from "../ui/feedback/FeedbackContext.tsx";
 
 const {Text} = Typography;
 
 export interface UserNoteProps extends Note {
     onToggle: (id: string, property: ToggleableNoteKeys) => Promise<void>;
     onDelete: (id: string) => Promise<void>;
+    onEdit: (id: string) => void;
 }
 
 export function UserNote({
@@ -23,12 +23,12 @@ export function UserNote({
                              weather,
                              tags,
                              onToggle,
-                             onDelete
+                             onDelete,
+                             onEdit
                          }: UserNoteProps) {
 
     const {token} = theme.useToken();
     const { t } = useI18n();
-    const { toast } = useFeedback();
     const [loading, setLoading] = useState<{
         toggle: boolean;
         delete: boolean;
@@ -75,6 +75,7 @@ export function UserNote({
     const handleArchive = () =>
         runWithLoading('archive', () => onToggle(id, 'archive'));
 
+    const handleEdit = () => onEdit(id)
 
     return (
         <Card
@@ -114,12 +115,6 @@ export function UserNote({
                                 fontSize: header ? token.fontSize : token.fontSizeXL,
                                 whiteSpace: header ? 'pre-wrap' : 'normal'
                             }}
-                            // editable={{
-                            //     icon: <HighlightOutlined />,
-                            //     tooltip: 'click to edit text',
-                            //     onChange: ()=>(alert(1)),
-                            //     enterIcon: null,
-                            // }}
                         >
                             {text}
                         </Text>
@@ -154,7 +149,7 @@ export function UserNote({
                                 aria-label="edit"
                                 type="default"
                                 icon={<EditOutlined/>}
-                                onClick={() => toast.warning('Функция редактирования еще не реализована')}
+                                onClick={() => handleEdit()}
                                 disabled={archive || isBusy}
                             />
                         </Tooltip>

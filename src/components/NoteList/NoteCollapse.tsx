@@ -10,9 +10,10 @@ import {EmptyTagFilterScreen} from "./EmptyTagFilterScreen.tsx";
 interface NotesCollapseProps {
     toggleNote: (id: string, property: ToggleableNoteKeys) => Promise<void>;
     deleteNote: (id: string) => Promise<void>;
+    editNote: (id: string) => void;
 }
 
-export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
+export function NotesCollapse({toggleNote, deleteNote, editNote}: NotesCollapseProps) {
     const {t} = useI18n();
 
     const {
@@ -49,6 +50,7 @@ export function NotesCollapse({toggleNote, deleteNote}: NotesCollapseProps) {
                             {...note}
                             onToggle={toggleNote}
                             onDelete={deleteNote}
+                            onEdit={editNote}
                         />
                     ))}
                 </Space>
