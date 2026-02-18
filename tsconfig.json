@@ -7,6 +7,8 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "esModuleInterop": true,
-    "types": ["jest", "@testing-library/jest-dom"]
+    "types": ["jest", "@testing-library/jest-dom"],
+    "target": "es2017",
+    "lib": ["dom", "es2017"]
   }
 }

@@ -36,6 +36,7 @@ const renderUserNote = (overrides = {}) => {
         ...baseNote,
         onToggle: jest.fn(),
         onDelete: jest.fn(),
+        onEdit: jest.fn()
     };
     return render(<UserNote {...defaultProps} {...overrides} />);
 };
