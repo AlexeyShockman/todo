@@ -1,11 +1,11 @@
-import {Button, Space, theme} from "antd";
-import {Header} from "antd/es/layout/layout";
-import ThemeToggle from "./ThemeToggle.tsx";
-import LangToggle from "./LangToggle.tsx";
-import Title from "antd/es/typography/Title";
-import {useAuth} from "../auth/AuthProvider.tsx";
-import {Link, useNavigate } from "react-router-dom";
-import {useI18n} from "../hooks/useI18n.ts";
+import {Button, Space, theme} from 'antd';
+import {Header} from 'antd/es/layout/layout';
+import ThemeToggle from './ThemeToggle.tsx';
+import LangToggle from './LangToggle.tsx';
+import Title from 'antd/es/typography/Title';
+import {useAuth} from '../auth/AuthProvider.tsx';
+import {Link, useNavigate } from 'react-router-dom';
+import {useI18n} from '../hooks/useI18n.ts';
 
 
 export function AppHeader () {
@@ -16,16 +16,16 @@ export function AppHeader () {
 
     const handleLogout = async () => {
         await logout();
-        navigate("/login");
+        navigate('/login');
     };
 
     return (
         <Header
             style={{
-                position: "fixed",
+                position: 'fixed',
                 zIndex: 999,
                 borderBottom: `1px dotted ${token.colorWarning}`,
-                width: "100%",
+                width: '100%',
                 display: 'flex',
                 alignItems: 'center',
                 justifyContent: 'space-between',
@@ -38,7 +38,7 @@ export function AppHeader () {
             <div style={{ color: token.colorWarning, fontWeight: 700, fontSize: '14px' }}>
                 TO DO LIST
             </div>
-            <Space size="middle" >
+            <Space size='middle' >
                 <ThemeToggle />
                 <LangToggle />
                 {user && user.email ? (
@@ -52,8 +52,8 @@ export function AppHeader () {
                     </>
                 ) : (
                     <>
-                        <Link to="/signup">{t.header.linkText.registration}</Link>
-                        <Link to="/login">{t.header.linkText.login}</Link>
+                        <Link to='/signup'>{t.header.linkText.registration}</Link>
+                        <Link to='/login'>{t.header.linkText.login}</Link>
                     </>
                 )}
 

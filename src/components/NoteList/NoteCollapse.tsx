@@ -1,10 +1,10 @@
-import {Collapse, Space} from "antd";
-import {UserNote} from "../UserNote.tsx";
-import {useSelector} from "react-redux";
-import {useI18n} from "../../hooks/useI18n.ts";
-import {selectNotesData} from "../../store/notesSlice.ts";
-import type {ToggleableNoteKeys} from "../../types/note.ts";
-import {EmptyTagFilterScreen} from "./EmptyTagFilterScreen.tsx";
+import {Collapse, Space} from 'antd';
+import {UserNote} from '../UserNote.tsx';
+import {useSelector} from 'react-redux';
+import {useI18n} from '../../hooks/useI18n.ts';
+import {selectNotesData} from '../../store/notesSlice.ts';
+import type {ToggleableNoteKeys} from '../../types/note.ts';
+import {EmptyTagFilterScreen} from './EmptyTagFilterScreen.tsx';
 
 
 interface NotesCollapseProps {
@@ -24,9 +24,9 @@ export function NotesCollapse({toggleNote, deleteNote, editNote}: NotesCollapseP
     } = useSelector(selectNotesData);
 
     const panels = [
-        {key: "wip", notes: activeNotes, label: t.list.collapse.wip, count: activeCount},
-        {key: "done", notes: doneNotes, label: t.list.collapse.done, count: doneCount},
-        {key: "archive", notes: archivedNotes, label: t.list.collapse.archive, count: archiveCount},
+        {key: 'wip', notes: activeNotes, label: t.list.collapse.wip, count: activeCount},
+        {key: 'done', notes: doneNotes, label: t.list.collapse.done, count: doneCount},
+        {key: 'archive', notes: archivedNotes, label: t.list.collapse.archive, count: archiveCount},
     ];
 
     if (!(activeCount || doneCount || archiveCount)) {
@@ -35,7 +35,7 @@ export function NotesCollapse({toggleNote, deleteNote, editNote}: NotesCollapseP
         )
     }
 
-    const defaultActiveKey = ["wip"];
+    const defaultActiveKey = ['wip'];
 
     const items = panels
         .filter(({count}) => count > 0)
@@ -43,7 +43,7 @@ export function NotesCollapse({toggleNote, deleteNote, editNote}: NotesCollapseP
             key,
             label: `${label} [${count}]`,
             children: (
-                <Space style={{display: "grid", gap: 10}}>
+                <Space style={{display: 'grid', gap: 10}}>
                     {notes.map((note) => (
                         <UserNote
                             key={note.id}

@@ -1,9 +1,9 @@
-import {Button, Input, Space} from "antd";
-import {useEffect, useState} from "react";
-import type {NoteOptions} from "../../types/note.ts";
-import {useI18n} from "../../hooks/useI18n.ts";
-import {selectActiveTags} from "../../store/notesSlice.ts";
-import {useSelector} from "react-redux";
+import {Button, Input, Space} from 'antd';
+import {useEffect, useState} from 'react';
+import type {NoteOptions} from '../../types/note.ts';
+import {useI18n} from '../../hooks/useI18n.ts';
+import {selectActiveTags} from '../../store/notesSlice.ts';
+import {useSelector} from 'react-redux';
 
 interface TodoListFormProps {
     btnLoading: boolean;
@@ -48,7 +48,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
     return (
         <>
             <Space
-                direction="vertical"
+                direction='vertical'
                 size={6}
                 style={{
                     width: '100%',
@@ -57,7 +57,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
             >
                 {noteOptions.longText && (
                     <Input
-                        size="large"
+                        size='large'
                         placeholder={t.list.edit.input.title}
                         value={headerText}
                         onChange={e => setHeaderText(e.target.value)}
@@ -67,7 +67,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
                 )}
 
                 <Input.TextArea
-                    size="large"
+                    size='large'
                     placeholder={t.list.edit.input[noteOptions.longText ? 'text' : 'shortNote']}
                     value={text}
                     onChange={e => setText(e.target.value)}
@@ -78,7 +78,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
 
                 {noteOptions.tags && (
                     <Input
-                        size="large"
+                        size='large'
                         placeholder={t.list.edit.input.tags}
                         value={tagsText}
                         onChange={e => setTagsText(e.target.value)}
@@ -90,7 +90,7 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
                 {/* Контейнер для центрирования кнопки */}
                 <div style={{ display: 'flex', justifyContent: 'center' }}>
                     <Button
-                        type="primary"
+                        type='primary'
                         onClick={handleAdd}
                         disabled={isFormEmpty || btnLoading}
                         loading={btnLoading}

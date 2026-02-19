@@ -1,22 +1,22 @@
 import {useState} from 'react';
 import {Divider, Space, Typography} from 'antd';
-import { addNoteDB, removeNoteDB, updateNoteDB } from "../../api/notes.ts";
-import {getCurrentWeather} from "../../services/weather.ts";
-import type {Note, ToggleableNoteKeys} from "../../types/note.ts";
-import {useI18n} from "../../hooks/useI18n.ts";
-import {ToDoListSkeleton} from "./ToDoListSkeleton.tsx";
-import {NoteOptionsSelector} from "./NoteOptionsSelector.tsx";
-import {useSelector} from "react-redux";
+import { addNoteDB, removeNoteDB, updateNoteDB } from '../../api/notes.ts';
+import {getCurrentWeather} from '../../services/weather.ts';
+import type {Note, ToggleableNoteKeys} from '../../types/note.ts';
+import {useI18n} from '../../hooks/useI18n.ts';
+import {ToDoListSkeleton} from './ToDoListSkeleton.tsx';
+import {NoteOptionsSelector} from './NoteOptionsSelector.tsx';
+import {useSelector} from 'react-redux';
 import {
     selectAllNotes,
     selectNotesLoadingStatus,
-} from "../../store/notesSlice.ts";
-import {TagsPanel} from "./TagsPanel.tsx";
-import {TodoListForm} from "./TodoListForm.tsx";
-import {NotesCollapse} from "./NoteCollapse.tsx";
-import {useAuth} from "../../auth/AuthProvider.tsx";
-import {useFeedback} from "../../ui/feedback/FeedbackContext.tsx";
-import {ModalChangeNote} from "../ModalChangeNote.tsx";
+} from '../../store/notesSlice.ts';
+import {TagsPanel} from './TagsPanel.tsx';
+import {TodoListForm} from './TodoListForm.tsx';
+import {NotesCollapse} from './NoteCollapse.tsx';
+import {useAuth} from '../../auth/AuthProvider.tsx';
+import {useFeedback} from '../../ui/feedback/FeedbackContext.tsx';
+import {ModalChangeNote} from '../ModalChangeNote.tsx';
 
 
 const {Title} = Typography;

@@ -1,6 +1,6 @@
 import { Switch } from 'antd'
 import {useThemeMode} from '../theme/ThemeContext.tsx';
-import {useI18n} from "../hooks/useI18n.ts";
+import {useI18n} from '../hooks/useI18n.ts';
 
 export default function ThemeToggle() {
     const { themeMode, setThemeMode } = useThemeMode();

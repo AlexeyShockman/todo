@@ -1,9 +1,9 @@
 import {Card, Checkbox, Typography, Space, Button, theme, Tooltip, Tag} from 'antd';
 import {DatabaseOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons';
-import type {Note, ToggleableNoteKeys} from "../types/note";
-import {decodeWeather} from "../services/weather";
-import {useI18n} from "../hooks/useI18n";
-import {useState} from "react";
+import type {Note, ToggleableNoteKeys} from '../types/note';
+import {decodeWeather} from '../services/weather';
+import {useI18n} from '../hooks/useI18n';
+import {useState} from 'react';
 
 const {Text} = Typography;
 
@@ -79,7 +79,7 @@ export function UserNote({
 
     return (
         <Card
-            size="small"
+            size='small'
             style={{
                 borderColor: done ? token.colorSuccess : token.colorBorder,
             }}
@@ -126,7 +126,7 @@ export function UserNote({
                         {tags && (
                             <Space.Compact style={{ flexWrap: 'wrap', flexDirection: 'row-reverse'}}>
                                 {tags.map((tag, i) => (
-                                    <Tag key={i} color="blue" >{tag}</Tag>
+                                    <Tag key={i} color='blue' >{tag}</Tag>
                                 ))}
                             </Space.Compact>
                         )}
@@ -136,7 +136,7 @@ export function UserNote({
                 </Space>
 
                 <Space style={{display: 'grid', rowGap: 3, justifyItems: 'end', width: 'max-content'}}>
-                    <Text type="secondary" style={{fontSize: token.fontSizeSM}}>
+                    <Text type='secondary' style={{fontSize: token.fontSizeSM}}>
                         {timeLabel} {dateLabel}
                     </Text>
 
@@ -146,8 +146,8 @@ export function UserNote({
                     }}>
                         <Tooltip title={archive ? t.note.tooltips.archiveNotEdited : t.note.tooltips.edit}>
                             <Button
-                                aria-label="edit"
-                                type="default"
+                                aria-label='edit'
+                                type='default'
                                 icon={<EditOutlined/>}
                                 onClick={() => handleEdit()}
                                 disabled={archive || isBusy}
@@ -168,7 +168,7 @@ export function UserNote({
                         <Tooltip title={t.note.tooltips.delete}>
                             <Button
                                 aria-label='delete'
-                                type="dashed"
+                                type='dashed'
                                 danger
                                 icon={<DeleteOutlined/>}
                                 onClick={() => handleDelete()}

@@ -1,8 +1,8 @@
-import {Space, Tag, theme} from "antd";
-import {selectActiveTags, selectNotesData, toggleTag} from "../../store/notesSlice.ts";
-import {useDispatch, useSelector} from "react-redux";
-import Title from "antd/es/typography/Title";
-import {useI18n} from "../../hooks/useI18n.ts";
+import {Space, Tag, theme} from 'antd';
+import {selectActiveTags, selectNotesData, toggleTag} from '../../store/notesSlice.ts';
+import {useDispatch, useSelector} from 'react-redux';
+import Title from 'antd/es/typography/Title';
+import {useI18n} from '../../hooks/useI18n.ts';
 
 
 export function TagsPanel () {

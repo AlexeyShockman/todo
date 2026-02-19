@@ -1,5 +1,5 @@
 import { dictionary } from './../i18n/dictionary.ts';
-import { useLang } from "../i18n/LangContext.tsx";
+import { useLang } from '../i18n/LangContext.tsx';
 
 
 export const useI18n = () => {

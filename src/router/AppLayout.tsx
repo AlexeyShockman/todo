@@ -1,11 +1,11 @@
 import { Layout, theme } from 'antd';
 
-import { Outlet } from "react-router-dom";
-import {useAppDispatch} from "../store/hooks.ts";
-import {useEffect} from "react";
-import {subscribeNotes} from "../store/noteThunks.ts";
-import {AppHeader} from "../components/AppHeader.tsx";
-import {useAuth} from "../auth/AuthProvider.tsx";
+import { Outlet } from 'react-router-dom';
+import {useAppDispatch} from '../store/hooks.ts';
+import {useEffect} from 'react';
+import {subscribeNotes} from '../store/noteThunks.ts';
+import {AppHeader} from '../components/AppHeader.tsx';
+import {useAuth} from '../auth/AuthProvider.tsx';
 
 const { Content } = Layout;
 

@@ -1,6 +1,6 @@
 import { Modal, Form, Input, Select } from 'antd';
-import {useEffect} from "react";
-import type {Note} from "../types/note.ts";
+import {useEffect} from 'react';
+import type {Note} from '../types/note.ts';
 
 
 interface ModalChangeNoteProps {
@@ -48,7 +48,7 @@ export function ModalChangeNote({
 
     return (
         <Modal
-            title="Редактирование заметки"
+            title='Редактирование заметки'
             open={!!note}
             onOk={handleOk}
             onCancel={onClose}
@@ -56,18 +56,18 @@ export function ModalChangeNote({
             {note && (
                 <Form
                     form={form}
-                    layout="vertical"
+                    layout='vertical'
                 >
                     <Form.Item
-                        label="Заголовок"
-                        name="header"
+                        label='Заголовок'
+                        name='header'
                     >
                         <Input />
                     </Form.Item>
 
                     <Form.Item
-                        label="Текст"
-                        name="text"
+                        label='Текст'
+                        name='text'
                         rules={[
                             { required: true, message: 'Введите текст заметки' },
                         ]}
@@ -76,10 +76,10 @@ export function ModalChangeNote({
                     </Form.Item>
 
                     <Form.Item
-                        label="Теги"
-                        name="tags"
+                        label='Теги'
+                        name='tags'
                     >
-                        <Select mode="tags" />
+                        <Select mode='tags' />
                     </Form.Item>
                 </Form>
             )}

@@ -1,8 +1,8 @@
-// import { useEffect, useState } from "react";
-// import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-// import { db } from "../firebase";
-// import type {Note} from "../types/note";
-// import { FIRST_LOADING_TIMEOUT } from "../constants/global.ts";
+// import { useEffect, useState } from 'react';
+// import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+// import { db } from '../firebase';
+// import type {Note} from '../types/note';
+// import { FIRST_LOADING_TIMEOUT } from '../constants/global.ts';
 //
 // // TODO use notes больше не нужен - состояние хранится в редаксе
 // export const useNotes = () => {
@@ -11,8 +11,8 @@
 //     const [loading, setLoading] = useState(true);
 //
 //     useEffect(() => {
-//         const notesRef = collection(db, "notes");
-//         const q = query(notesRef, orderBy("date", "desc"));
+//         const notesRef = collection(db, 'notes');
+//         const q = query(notesRef, orderBy('date', 'desc'));
 //
 //         const unsubscribe = onSnapshot(q, snapshot => {
 //             const updatedNotes = snapshot.docs.map(d => {

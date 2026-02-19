@@ -1,8 +1,8 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { collection, onSnapshot, query, orderBy } from "firebase/firestore";
-import { db } from "../firebase";
-import type { Note } from "../types/note";
-import {addNote, removeNote, resetNotes, setAllNotes, updateNote} from "./notesSlice.ts";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { collection, onSnapshot, query, orderBy } from 'firebase/firestore';
+import { db } from '../firebase';
+import type { Note } from '../types/note';
+import {addNote, removeNote, resetNotes, setAllNotes, updateNote} from './notesSlice.ts';
 
 let unsubscribe: (() => void) | null = null;
 
@@ -10,11 +10,11 @@ export const subscribeNotes = createAsyncThunk<
     void,
     string | null  // аргумент: userId
 >(
-    "notes/subscribe",
+    'notes/subscribe',
     async (userId, { dispatch }) => {
 
         if (!userId) {
-            console.warn("subscribeNotes: userId is null, skipping subscription");
+            console.warn('subscribeNotes: userId is null, skipping subscription');
             return;
         }
 
@@ -23,7 +23,7 @@ export const subscribeNotes = createAsyncThunk<
 
 
         const notesRef = collection(db, `users/${userId}/notes`);
-        const q = query(notesRef, orderBy("date", "desc"));
+        const q = query(notesRef, orderBy('date', 'desc'));
 
         return new Promise<void>((resolve) => {
             let isInitial = true;
@@ -50,11 +50,11 @@ export const subscribeNotes = createAsyncThunk<
                         ...change.doc.data(),
                     } as Note;
 
-                    if (change.type === "added") {
+                    if (change.type === 'added') {
                         dispatch(addNote(note));
-                    } else if (change.type === "modified") {
+                    } else if (change.type === 'modified') {
                         dispatch(updateNote(note));
-                    } else if (change.type === "removed") {
+                    } else if (change.type === 'removed') {
                         dispatch(removeNote(note.id));
                     }
                 })
@@ -65,7 +65,7 @@ export const subscribeNotes = createAsyncThunk<
 );
 
 export const unsubscribeNotes = createAsyncThunk(
-    "notes/unsubscribe",
+    'notes/unsubscribe',
     async (_, { dispatch }) => {
         unsubscribe?.();
         unsubscribe = null;

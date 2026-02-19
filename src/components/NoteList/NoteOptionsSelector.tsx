@@ -1,13 +1,13 @@
-import { Checkbox, Space } from "antd";
-import type {NoteOptions} from "../../types/note.ts";
-import {useI18n} from "../../hooks/useI18n.ts";
+import { Checkbox, Space } from 'antd';
+import type {NoteOptions} from '../../types/note.ts';
+import {useI18n} from '../../hooks/useI18n.ts';
 
 interface NoteOptionsSelectorProps {
     options: NoteOptions;
     onToggle: (key: keyof NoteOptions) => void;
 }
 
-const OPTIONS_CONFIG = ["weather", "longText", "tags"] as const;
+const OPTIONS_CONFIG = ['weather', 'longText', 'tags'] as const;
 
 export function NoteOptionsSelector({ options, onToggle }: NoteOptionsSelectorProps) {
     const { t } = useI18n();

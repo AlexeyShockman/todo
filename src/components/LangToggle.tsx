@@ -1,5 +1,5 @@
 import { Switch } from 'antd'
-import {useI18n} from "../hooks/useI18n.ts";
+import {useI18n} from '../hooks/useI18n.ts';
 
 
 export default function LangToggle() {
@@ -8,8 +8,8 @@ export default function LangToggle() {
     return (
         <Switch
             checked={lang === 'ru'}
-            checkedChildren="RU"
-            unCheckedChildren="EN"
+            checkedChildren='RU'
+            unCheckedChildren='EN'
             onChange={toggleLang}
         />
     );

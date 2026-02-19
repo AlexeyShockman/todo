@@ -1,16 +1,16 @@
 // import { useState } from 'react'
-import { App, ConfigProvider } from "antd";
+import { App, ConfigProvider } from 'antd';
 import { createThemeConfig } from '../theme'
 // import type { ThemeMode } from '../theme'
 // import { loadThemeFromStorage } from './../theme/theme-storage'
 // import App from './../App'
 import {Provider} from 'react-redux';
 import {store} from '../store';
-import {LangProvider} from "../i18n/LangContext.tsx";
-import {AuthProvider} from "../auth/AuthProvider.tsx";
-import {AppRouter} from "../router/AppRouter.tsx";
-import {ThemeProvider, useThemeMode} from "../theme/ThemeContext.tsx";
-import {FeedbackProvider} from "../ui/feedback/FeedbackContext.tsx";
+import {LangProvider} from '../i18n/LangContext.tsx';
+import {AuthProvider} from '../auth/AuthProvider.tsx';
+import {AppRouter} from '../router/AppRouter.tsx';
+import {ThemeProvider, useThemeMode} from '../theme/ThemeContext.tsx';
+import {FeedbackProvider} from '../ui/feedback/FeedbackContext.tsx';
 
 export default function Root() {
     return (

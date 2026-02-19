@@ -1,7 +1,7 @@
-import {createSelector, createSlice, type PayloadAction} from "@reduxjs/toolkit";
-import type { Note } from "../types/note";
-import type {RootState} from "./index.ts";
-import {subscribeNotes} from "./noteThunks.ts";
+import {createSelector, createSlice, type PayloadAction} from '@reduxjs/toolkit';
+import type { Note } from '../types/note';
+import type {RootState} from './index.ts';
+import {subscribeNotes} from './noteThunks.ts';
 
 
 interface NotesState {
@@ -21,7 +21,7 @@ const initialState: NotesState = {
 };
 
 const notesSlice = createSlice({
-    name: "notes",
+    name: 'notes',
     initialState,
     reducers: {
         addNote: (state, action: PayloadAction<Note>) => {
@@ -68,7 +68,7 @@ const notesSlice = createSlice({
         builder
             .addCase(subscribeNotes.pending, (state) => { state.loading = true; state.error = null })
             .addCase(subscribeNotes.fulfilled, (state) => { state.loading = false })
-            .addCase(subscribeNotes.rejected, (state, action) => { state.loading = false; state.error = action.error?.message ?? "Error" });
+            .addCase(subscribeNotes.rejected, (state, action) => { state.loading = false; state.error = action.error?.message ?? 'Error' });
     }
 });
 

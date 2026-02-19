@@ -1,5 +1,5 @@
 import {createContext, useContext, useState, useEffect, type ReactNode} from 'react';
-import type { ThemeMode } from "./index";
+import type { ThemeMode } from './index';
 
 const THEME_KEY = 'app_theme_v1';
 
