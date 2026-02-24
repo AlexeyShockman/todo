@@ -61,7 +61,7 @@ export function ToDoList() {
             if (noteOptions.weather) {
                 weather = await getCurrentWeather();
             }
-            const tags = noteOptions.tags ? noteData.tagsText.split(' ').filter(tag => !!tag) : [];
+            const tags = noteOptions.tags ?Array.from(new Set(noteData.tagsText.trim().split(/\s+/))) : [];
             const header = noteOptions?.longText ? noteData.headerText : '';
 
             const newNote: Note = {
