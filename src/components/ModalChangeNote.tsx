@@ -1,6 +1,7 @@
 import { Modal, Form, Input, Select } from 'antd';
 import {useEffect} from 'react';
 import type {Note} from '../types/note.ts';
+import {useI18n} from "../hooks/useI18n.ts";
 
 
 interface ModalChangeNoteProps {
@@ -15,12 +16,13 @@ export function ModalChangeNote({
                                     onClose,
                                     onSave,
                                 }: ModalChangeNoteProps) {
+    const { t } = useI18n();
     const [form] = Form.useForm();
 
     useEffect(() => {
         if (note) {
             form.setFieldsValue({
-                ...note
+                ...note, tags: note.tags ? note.tags.join(' ') : '',
             });
         } else {
             form.resetFields();
@@ -32,23 +34,26 @@ export function ModalChangeNote({
 
         try {
             const values = await form.validateFields();
+            const updatedTags = values.tags ? Array.from(new Set(values.tags.trim().split(/\s+/))) : [];
+            const updatedHeader = values.header ? values.header.trim : null;
 
             const updatedNote: Note = {
                 ...note,
                 ...values,
-                header: values.header || null,
+                header: updatedHeader,
+                tags: updatedTags,
             };
 
             onSave(updatedNote);
             onClose();
         } catch {
-            // ошибки валидации — Modal не закроется
+            // ошибки валидации
         }
     };
 
     return (
         <Modal
-            title='Редактирование заметки'
+            title={t.list.edit.editing.title}
             open={!!note}
             onOk={handleOk}
             onCancel={onClose}
@@ -59,27 +64,36 @@ export function ModalChangeNote({
                     layout='vertical'
                 >
                     <Form.Item
-                        label='Заголовок'
+                        label={t.list.edit.input.title}
                         name='header'
                     >
                         <Input />
                     </Form.Item>
 
                     <Form.Item
-                        label='Текст'
+                        label={t.list.edit.input.text}
                         name='text'
                         rules={[
-                            { required: true, message: 'Введите текст заметки' },
+                            {
+                                validator: (_, value) => {
+                                    if (!value || !value.trim()) {
+                                        return Promise.reject(
+                                            new Error(t.list.edit.editing.emptyTextFieldMessage)
+                                        );
+                                    }
+                                    return Promise.resolve();
+                                },
+                            },
                         ]}
                     >
                         <Input.TextArea rows={4} />
                     </Form.Item>
 
                     <Form.Item
-                        label='Теги'
+                        label={t.list.edit.editing.tags}
                         name='tags'
                     >
-                        <Select mode='tags' />
+                        <Input />
                     </Form.Item>
                 </Form>
             )}
