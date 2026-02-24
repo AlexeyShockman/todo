@@ -1,4 +1,4 @@
-import { Modal, Form, Input, Select } from 'antd';
+import { Modal, Form, Input } from 'antd';
 import {useEffect} from 'react';
 import type {Note} from '../types/note.ts';
 import {useI18n} from "../hooks/useI18n.ts";
