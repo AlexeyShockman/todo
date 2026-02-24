@@ -42,6 +42,11 @@ export const dictionary = {
                     title: 'Заголовок',
                     text: 'Текст заметки',
                     tags: 'Теги (через пробел)',
+                },
+                editing: {
+                    title: 'Редактирование заметки',
+                    tags: 'Теги',
+                    emptyTextFieldMessage: 'Текст заметки обязателен',
                 }
             },
             collapse: {
@@ -174,6 +179,11 @@ export const dictionary = {
                     text: 'Note text',
                     tags: 'Tags (separated by spaces)',
                 },
+                editing: {
+                    title: 'Edit Note',
+                    tags: 'Tags',
+                    emptyTextFieldMessage: 'Note text is required',
+                }
             },
             collapse: {
                 wip: 'In progress',
