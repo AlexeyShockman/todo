@@ -35,7 +35,7 @@ export function ModalChangeNote({
         try {
             const values = await form.validateFields();
             const updatedTags = values.tags ? Array.from(new Set(values.tags.trim().split(/\s+/))) : [];
-            const updatedHeader = values.header ? values.header.trim : null;
+            const updatedHeader = values.header ? values.header.trim() : null;
 
             const updatedNote: Note = {
                 ...note,
