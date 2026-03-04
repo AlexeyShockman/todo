@@ -1,5 +1,5 @@
 import {createSelector, createSlice, type PayloadAction} from '@reduxjs/toolkit';
-import type { Note } from '../types/note';
+import type {Note} from '../types/note';
 import type {RootState} from './index.ts';
 import {subscribeNotes} from './noteThunks.ts';
 
@@ -8,6 +8,7 @@ interface NotesState {
     byId: Record<string, Note>;
     allIds: string[];
     activeTags: string[];
+    activeSubTags: string[];
     loading: boolean;
     error: string | null;
 }
@@ -16,6 +17,7 @@ const initialState: NotesState = {
     byId: {},
     allIds: [],
     activeTags: [],
+    activeSubTags: [],
     loading: true,
     error: null,
 };
@@ -58,8 +60,19 @@ const notesSlice = createSlice({
                 state.activeTags.push(tag);
             }
         },
+        toggleSubTag: (state, action: PayloadAction<string>) => {
+            const subTag = action.payload;
+            if (state.activeSubTags.includes(subTag)) {
+                state.activeSubTags = state.activeSubTags.filter(st => st !== subTag);
+            } else {
+                state.activeSubTags.push(subTag);
+            }
+        },
         clearAllTags: (state) => {
             state.activeTags = [];
+        },
+        clearAllSubTags: (state) => {
+            state.activeSubTags = [];
         },
         resetNotes: () => initialState,
 
@@ -82,43 +95,87 @@ export const selectAllNotes = createSelector(
 );
 export const selectNotesLoadingStatus = (state: RootState) => state.notes.loading;
 export const selectActiveTags = (state: RootState) => state.notes.activeTags;
+export const selectActiveSubTags = (state: RootState) => state.notes.activeSubTags;
 
+// выделяем и теги и саб теги (просто берем все вместе)
+export const selectAllTags = createSelector (
+    selectNotesState,
+    (notes) => {
+        const allTagsSet = new Set<string>();
+
+        for (const id of notes.allIds) {
+            const note = notes.byId[id];
+
+            for (const tags of note.tags) {
+                allTagsSet.add(tags);
+            }
+        }
+
+        return Array.from(allTagsSet).sort();
+    }
+)
+
+export const selectSubTags = createSelector(
+    [selectAllTags, selectActiveTags], (allTags, activeTags) => {
+
+        if (!(activeTags.length === 1)) {
+            return [];
+        }
+
+        const allSubTagsSet = new Set<string>();
+        allTags.forEach(tag => {
+            if (tag.includes(activeTags[0] + '--')) {
+                const subTagsFromTag = tag.replace(activeTags[0] + '--', '').split('--');
+                subTagsFromTag.forEach(subTag => {allSubTagsSet.add(subTag)});
+            }
+        })
+
+        return Array.from(allSubTagsSet).sort();
+    }
+);
+
+export const selectTags = createSelector(
+    [selectAllTags, selectSubTags],
+    (allTags, subTags) => {
+        return {
+            tags: allTags.filter((t) => !(t.includes('--'))),
+            subTags,
+        }
+    }
+);
 
 
 export const selectNotesData = createSelector(
-    [selectNotesState, selectActiveTags],
-    (notes, activeTags) => {
+    [selectNotesState, selectActiveTags, selectActiveSubTags],
+    (notes, activeTags, activeSubTags) => {
         const activeNotes: Note[] = [];
         const doneNotes: Note[] = [];
         const archivedNotes: Note[] = [];
-
-        const allTagsSet = new Set<string>();
 
         const matchesTags = (note: Note) =>
             activeTags.length === 0 ||
             activeTags.every(tag => note.tags.includes(tag));
 
+        const matchesSubTags = (note: Note) =>
+            activeSubTags.length === 0 ||
+            activeSubTags.every(subTag => note.tags.some(tag => tag.includes(subTag)));
+
         for (const id of notes.allIds) {
             const n = notes.byId[id];
 
-            for (const t of n.tags) {
-                allTagsSet.add(t);
-            }
-
             if (!matchesTags(n)) continue;
+
+            if (!matchesSubTags(n)) continue;
 
             if (n.archive) archivedNotes.push(n);
             else if (n.done) doneNotes.push(n);
             else activeNotes.push(n);
         }
 
-        const allTags = Array.from(allTagsSet).sort();
-
         return {
             activeNotes,
             doneNotes,
             archivedNotes,
-            allTags,
             counters: {
                 active: activeNotes.length,
                 done: doneNotes.length,
@@ -127,5 +184,16 @@ export const selectNotesData = createSelector(
         };
     }
 );
-export const { addNote, updateNote, removeNote, setAllNotes, toggleTag, clearAllTags, resetNotes } = notesSlice.actions;
+
+export const {
+    addNote,
+    updateNote,
+    removeNote,
+    setAllNotes,
+    toggleTag,
+    toggleSubTag,
+    clearAllTags,
+    clearAllSubTags,
+    resetNotes
+} = notesSlice.actions;
 export default notesSlice.reducer;

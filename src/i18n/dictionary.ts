@@ -55,6 +55,7 @@ export const dictionary = {
                 archive: 'Архив',
             },
             tagsPanelText: 'Фильтрация по тегам:',
+            subTagsPanelText: 'Подразделы Тегов:',
         },
         loginPage: {
             title: 'Авторизация',
@@ -191,6 +192,7 @@ export const dictionary = {
                 archive: 'Archive',
             },
             tagsPanelText: 'Filter by tags:',
+            subTagsPanelText: 'Sub tags',
         },
         loginPage: {
             title: 'Authorization',
