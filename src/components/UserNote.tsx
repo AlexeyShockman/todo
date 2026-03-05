@@ -3,7 +3,8 @@ import {DatabaseOutlined, DeleteOutlined, EditOutlined} from '@ant-design/icons'
 import type {Note, ToggleableNoteKeys} from '../types/note';
 import {decodeWeather} from '../services/weather';
 import {useI18n} from '../hooks/useI18n';
-import {useState} from 'react';
+import {useState, useMemo} from 'react';
+import {buildNoteTagsUI} from "../utils/buildNoteTagsUI.ts";
 
 const {Text} = Typography;
 
@@ -38,6 +39,7 @@ export function UserNote({
         delete: false,
         archive: false,
     });
+    const structuredTags = useMemo(() => buildNoteTagsUI([...tags].sort()), [tags]);
 
     const isBusy = Object.values(loading).some(Boolean);
 
@@ -123,10 +125,14 @@ export function UserNote({
                                 <Text>{weather}</Text>
                             </Tooltip>
                         }
-                        {tags && (
-                            <Space.Compact style={{ flexWrap: 'wrap', flexDirection: 'row-reverse'}}>
-                                {tags.map((tag, i) => (
-                                    <Tag key={i} color='blue' >{tag}</Tag>
+                        {structuredTags && (
+                            <Space.Compact style={{ flexWrap: 'wrap', gap: 2}}>
+                                {structuredTags.map((tag) => (
+                                    <Tag
+                                        key={tag.value}
+                                        color={tag.type === 'root' ? 'blue' : 'orange'}
+                                        style={{margin: 0, borderRadius: 0}}
+                                    >{tag.value}</Tag>
                                 ))}
                             </Space.Compact>
                         )}
