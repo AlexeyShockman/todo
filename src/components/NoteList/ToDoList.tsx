@@ -46,6 +46,22 @@ export function ToDoList() {
     }
 
 
+    const prepareTags = (tagsText: string): string[] => {
+        if (tagsText.length === 0) {
+            return [];
+        }
+        let tags: string[] = Array.from(new Set(tagsText.trim().split(/\s+/)));
+
+        tags = tags.map(tag => {
+            return tag
+                .replace(/^-+|-+$/g, '')
+                .replace(/-{3,}/g, '--');
+        });
+
+        return tags;
+    }
+
+
     const addNote = async (
         noteData: { text: string; headerText: string; tagsText: string }
     ) => {
@@ -61,7 +77,7 @@ export function ToDoList() {
             if (noteOptions.weather) {
                 weather = await getCurrentWeather();
             }
-            const tags = noteOptions.tags ?Array.from(new Set(noteData.tagsText.trim().split(/\s+/))) : [];
+            const tags = noteOptions.tags ? prepareTags(noteData.tagsText) : [];
             const header = noteOptions?.longText ? noteData.headerText : '';
 
             const newNote: Note = {
@@ -122,7 +138,6 @@ export function ToDoList() {
     }
 
     const openChangeNoteModal = async (noteId: string) => {
-        toast.success(`edit note ${noteId}`);
         const changingNote = notesR.find((note) => note.id === noteId);
         setEditingNote(changingNote || null);
     }

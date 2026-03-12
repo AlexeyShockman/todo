@@ -2,7 +2,7 @@ import {Button, Input, Space} from 'antd';
 import {useEffect, useState} from 'react';
 import type {NoteOptions} from '../../types/note.ts';
 import {useI18n} from '../../hooks/useI18n.ts';
-import {selectActiveTags} from '../../store/notesSlice.ts';
+import {selectActiveTags, selectActiveSubTags} from '../../store/notesSlice.ts';
 import {useSelector} from 'react-redux';
 
 interface TodoListFormProps {
@@ -16,14 +16,20 @@ export function TodoListForm({btnLoading, noteOptions, onAddNote}: TodoListFormP
 
     const { t } = useI18n();
     const activeTags = useSelector(selectActiveTags);
+    const activeSubTags = useSelector(selectActiveSubTags);
 
     const [text, setText] = useState('');
     const [headerText, setHeaderText] = useState('');
     const [tagsText, setTagsText] = useState('');
     
     useEffect(() => {
-        setTagsText([...activeTags].join(' '));
-    }, [activeTags])
+        if (activeTags.length === 1) {
+            const fullSubTags = activeSubTags.map(subTag => activeTags[0] + '--' + subTag);
+            setTagsText([...activeTags, ...fullSubTags].join(' '));
+        } else {
+            setTagsText([...activeTags].join(' '));
+        }
+    }, [activeTags, activeSubTags])
 
     const handleAdd = async () => {
         await onAddNote({ text, headerText, tagsText });

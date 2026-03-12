@@ -39,7 +39,7 @@ export function UserNote({
         delete: false,
         archive: false,
     });
-    const structuredTags = useMemo(() => buildNoteTagsUI([...tags].sort()), [tags]);
+    const structuredTags = useMemo(() => buildNoteTagsUI(tags), [tags]);
 
     const isBusy = Object.values(loading).some(Boolean);
 

@@ -5,7 +5,9 @@ type UITag =
 export const buildNoteTagsUI = (tags: string[]): UITag[] => {
     const map = new Map<string, Set<string>>();
 
-    for (const tag of tags) {
+    const sortedTags = [...tags].sort();
+
+    for (const tag of sortedTags) {
         const parts = tag.split('--').filter(Boolean);
         if (!parts.length) continue;
 

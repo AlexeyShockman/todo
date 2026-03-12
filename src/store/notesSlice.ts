@@ -152,13 +152,15 @@ export const selectNotesData = createSelector(
         const doneNotes: Note[] = [];
         const archivedNotes: Note[] = [];
 
-        const matchesTags = (note: Note) =>
-            activeTags.length === 0 ||
+        const matchesTags = (note: Note) => {
+            return activeTags.length === 0 ||
             activeTags.every(tag => note.tags.includes(tag));
+        }
 
-        const matchesSubTags = (note: Note) =>
-            activeSubTags.length === 0 ||
-            activeSubTags.every(subTag => note.tags.some(tag => tag.includes(subTag)));
+        const matchesSubTags = (note: Note) => {
+            return activeSubTags.length === 0 ||
+            activeSubTags.every(subTag => note.tags.some(tag => tag.includes('--' + subTag)));
+        }
 
         for (const id of notes.allIds) {
             const n = notes.byId[id];
